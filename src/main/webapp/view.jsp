@@ -72,7 +72,7 @@
             <li>
                <label>조회수</label> ${col.hit }
             </li>
-            <li class="content">
+            <li class="content p-3">
                 ${col.content }
             </li>
             <li>
@@ -112,8 +112,9 @@
 	                    </div>
 	                    <div class="col-2">
 	                       <div class="cdel-edit d-flex justify-content-center align-items-center">
-	                           <a href="#">수정</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#">삭제</a>
-	                       </div>
+								<a href="#" data-memoid="${list.id }" class="memodal">수정</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+								<a href="#" data-memoid="${list.id }" class="memodel">삭제</a>
+							</div>
 	                    </div>
 	                </div>    
 	            </li>
@@ -123,67 +124,66 @@
         
         
         <div class="comment-write">
-            <form name="commentForm" action="action/memo.jsp" id="commentForm" method="post">
-              <input type="hidden" name="wdate" value= "<%=now %>" />
-              <input type="hidden" name="bbs_id" id="bbsid" value="${param.id }" />
-              <div class="d-flex">
-	              <div class="form-group col-10">   
-	                <textarea name="content" id="comment" class="comment form-control"></textarea>
-	              </div>
-	              <div class="col-2">
-	              	<button type="submit" class="memo_submit btn btn-primary"> 전 송 </button>
-	              </div>              
-              </div>
-              <div class="form-group">
-                <div class="row">  
-                    <div class="col-3 ml-3">
-                       <input type="text" class="form-control memowriter" id="writer" name="writer" placeholder="이름" required>
-                    </div>
-                    <div class="col-3">
-                       <input type="password" class="form-control memopwd" id="pwd" name="pwd"  placeholder="비밀번호" required>
-                    </div>    
-                </div>
-               </div>
-            </form>
-            
-            <div class="modal123">
-            	<div class="modal-content">
-            		<form action="action/memoUpdate.jsp" method="post" name="memoUpdateForm" id="memoUpdateForm">
-	            		<input type="hidden" name="wdate" value= "<%=now %>" />
-              			<input type="hidden" name="bbs_id" id="bbsid" value="${param.id }" />
-	            		<div class="modal-header">
-	            			<h5>댓글 수정</h5>
-	            			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	            				<span aria-hidden="true">&times;</span>
-	            			</button>
-	            		</div>
-	            		<div class="modal-body">
-	            			<div class="form-group col-3">
-	            				<label for="">작성자</label>
-	            				<input type="text" name="newWriter" class="form-control"/>
-	            			</div>
-	            			<div class="form-group col-3">
-	            				<label for="">비밀번호</label>
-	            				<input type="password" name="newPwd" class="form-control"/>
-	            			</div>
-	            			<div class="form-group px-3">
-	            				<label for="">내용</label>
-	            				<textarea name="newContent" id="" cols="" rows="3" class="form-control"></textarea>
-	            			</div>
-	            		</div>
-	            		<div class="modal-footer">
-	            			<button type="button" class="btn btn-secondary" data-dismiss="modal">취 소</button>
-	            			<button type="button" class="btn btn-primary">변 경</button>
-	            		</div>
-            		</form>
-            	</div>
-            </div>
-        </div>
-        
-   </div><!-- /.container -->
+			<form name="commentForm" action="action/memo.jsp" id="commentForm"
+				method="post">
+				<input type="hidden" name="wdate" value="<%=now%>" /> 
+				<input type="hidden" name="bbs_id" id="bbsid" value="${param.id }" /> 
+				<input type="hidden" name="mode" value="write" />
+				<div class="d-flex">
+					<div class="form-group col-10">
+						<textarea name="content" id="comment" class="comment form-control"></textarea>
+					</div>
+					<div class="col-2">
+						<button type="submit" class="memo_submit btn btn-primary">
+							전 송</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-3 ml-3">
+							<input type="text" class="form-control memowriter" id="writer"
+								name="writer" placeholder="이름" required>
+						</div>
+						<div class="col-3">
+							<input type="password" class="form-control memopwd"
+								name="pwd" placeholder="비밀번호" required>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- /.container -->
 
-    <div class="loading">
-       <div class="spinner-border text-primary"></div>
-    </div>
-    </body>
-    </html>        
+	<div class="loading">
+		<div class="spinner-border text-primary"></div>
+	</div>
+
+	<!-- modal -->
+	<div class="popup py-3">
+		<div class="text-right">
+			<a href="#" class="closebtn">&times;</a>
+		</div>
+		<form action="action/memo.jsp" id="memoeditForm" method="post">
+			<input type="hidden" name="wdate" value="<%=now%>" />
+			<input type="hidden" name="bbs_id" value="${param.id }" /> <input
+				type="hidden" name="memoid" id="memoid" value="${list.id }" /> <input
+				type="hidden" name="mode" value="edit" />
+			<div class="form-group">
+				<textarea name="content" class="form-control mb-3" id="memocomment"
+					rows="5"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="pwd">비밀번호</label> 
+				<input type="password" class="form-control col-4" name="editpwd" />
+			</div>
+
+			<button type="submit" class="btn btn-success">전 송</button>
+		</form>
+	</div>
+	<div class="loading">
+	 	<div class="spinner-border text-primary"></div> 
+	</div>
+
+</body>
+</html>        
