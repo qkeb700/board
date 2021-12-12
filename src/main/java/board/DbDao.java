@@ -113,6 +113,7 @@ public class DbDao {
 		}
 	}
 	
+	
 	// hit증가
 	public void hitUpdateDb(String col, String id) {
 		PreparedStatement pstmt = null;
@@ -141,7 +142,6 @@ public class DbDao {
 	//delete
 	public void delete(String id) {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		try {
 			String sql = "delete from board where id = ?";
 			pstmt = connection.prepareStatement(sql);
@@ -193,39 +193,6 @@ public class DbDao {
 		}
 		return column;
 	}
-	
-	// select Comment
-	/*public Comment selectCom(String id) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Comment comment = new Comment();
-		try {
-			String sql = "select * from bbsmemo where bbs_id = ?";
-			pstmt = connection.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				comment.setId(rs.getString("id"));
-				comment.setBbsid(rs.getString("bbs_id"));
-				comment.setWriter(rs.getString("writer"));
-				comment.setPwd(rs.getString("pwd"));
-				comment.setContent(rs.getString("content"));
-				comment.setWdate(rs.getString("wdate"));				
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return comment;
-	}
-	*/
 	
 	//selectAll
 	public int selectAll(String col, String val) {
@@ -378,4 +345,79 @@ public class DbDao {
 		}
 		return list;
 	}
+	
+	//selectOne
+		public MemoColumn selectmemoOne(String id) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			MemoColumn column = new MemoColumn();
+			try {
+				String sql = "select * from bbsmemo where id = ?";
+				pstmt = connection.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+						column.setId(rs.getString("id"));
+						column.setPwd(rs.getString("pwd"));
+						column.setWdate(rs.getString("wdate"));
+					
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				if(pstmt != null) {
+					try {
+						pstmt.close();
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return column;
+		}
+	
+	// memo 업데이트
+		public void updatememoDb(MemoColumn column, String content, String wdate) {
+			PreparedStatement pstmt = null;
+			try {
+				String sql = "update bbsmemo set content=?, wdate=? where id=?";
+				pstmt = connection.prepareStatement(sql);
+				pstmt.setString(1, content);
+				pstmt.setString(2, wdate);
+				pstmt.setString(3, column.getId());
+				pstmt.executeUpdate();			
+			} catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if(pstmt!=null) {
+					try {
+						pstmt.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+		//deleteMemo
+		public void deletememoOne(String id) {
+			PreparedStatement pstmt = null;
+			try {
+				String sql = "delete from bbsmemo where id = ?";
+				pstmt = connection.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if(pstmt!=null) {
+					try {
+						pstmt.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 }
