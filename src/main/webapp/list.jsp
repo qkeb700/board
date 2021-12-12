@@ -73,7 +73,7 @@
 	                 <td>
 	                     <a href="view.jsp?id=${list.getId() }&pg=${param.pg}" class="icon pc-hidden"><i class="fas fa-user-tie"></i></a>
 	                     <a href="view.jsp?id=${list.getId() }&pg=${param.pg}" class="utxt pc-hidden">${list.getWriter() }[${list.getWdate() }]</a>
-	                     <a href="view.jsp?id=${list.getId() }&pg=${param.pg}">${list.getTitle() }<c:if test="${list.getMemocount() >0 }">[${list.getMemocount() }]</c:if></a>
+	                     <a href="view.jsp?id=${list.getId() }&pg=${param.pg}">${list.getTitle() }<c:if test="${list.getMemocount() >0 }"> [${list.getMemocount() }]</c:if></a>
 	                 </td>
 	                 <td class="mobile-hidden"><a href="view.jsp?id=${list.getId() }&pg=${param.pg}">${list.getWriter() }</a></td> 
 	                 <td class="mobile-hidden">${list.getWdate() }</td>
@@ -131,9 +131,6 @@
 </c:if>       
        </ul>
    </div><!-- /.container -->
-
-
-
 
 
 <div class="loading">
