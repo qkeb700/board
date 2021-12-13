@@ -2,11 +2,11 @@
 # 개인 프로젝트: 게시판
 
 ## 개발환경
-#####	개발 툴: Eclipse
-	개발언어: JAVA JDK 1.8 64bit
-	서버 및 데이터베이스: Tomcat 9.0v, MySQL
-	디자인 API: Bootstrap 4, Font-awesome
-	깃허브 주소: https://github.com/qkeb700
+- #####	개발 툴: Eclipse
+- #####	개발언어: JAVA JDK 1.8 64bit
+- #####	서버 및 데이터베이스: Tomcat 9.0v, MySQL
+- #####	디자인 API: Bootstrap 4, Font-awesome
+- #####	깃허브 주소: https://github.com/qkeb700
 
 ## 프로젝트 요약
 	회원가입, 로그인을 하고 글을 작성, 읽기, 수정, 삭제 할 수 있습니다.
