@@ -1,15 +1,15 @@
 # board
 
-개인 프로젝트: 게시판
+### 개인 프로젝트: 게시판
 
-개발환경
+## 개발환경
 	개발 툴: Eclipse
 	개발언어: JAVA JDK 1.8 64bit
 	서버 및 데이터베이스: Tomcat 9.0v, MySQL
 	디자인 API: Bootstrap 4, Font-awesome
 	깃허브 주소: https://github.com/qkeb700
 
-프로젝트 요약
+## 프로젝트 요약
 	회원가입, 로그인을 하고 글을 작성, 읽기, 수정, 삭제 할 수 있습니다.
 	아이디/비밀번호를 찾는 기능과 글 작성시 파일을 업로드 할 수 있습니다.
 	관련 내용 게시물을 찾아 보여주는 검색 창이 있습니다.
@@ -21,7 +21,7 @@
 1.	회원가입
 회원 약관 동의를 통해 가입을 할 수 있습니다.
  
- ![insert](https://user-images.githubusercontent.com/46728564/145846558-5aa805c8-455e-4ea2-ba62-12282dd5af0e.png)
+![signup](https://user-images.githubusercontent.com/46728564/145846831-4d046c1c-50fd-4343-9db7-21ccd9889719.png)
 
  
 2.	로그인
