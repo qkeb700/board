@@ -2,7 +2,7 @@
 # 개인 프로젝트: 게시판
 
 ## 개발환경
-	개발 툴: Eclipse
+#####	개발 툴: Eclipse
 	개발언어: JAVA JDK 1.8 64bit
 	서버 및 데이터베이스: Tomcat 9.0v, MySQL
 	디자인 API: Bootstrap 4, Font-awesome
