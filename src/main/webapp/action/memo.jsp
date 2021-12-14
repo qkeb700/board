@@ -60,6 +60,7 @@
 				out.print(jobj.toJSONString());				
 			}else{
 				DbDao.getInstance().deletememoOne(request.getParameter("memoid"));
+				DbDao.getInstance().hitUpdateDb("delmemocount", bbs_id);
 				jobj.put("result", "2");
 				response.setContentType("application/json");
 				out.print(jobj.toJSONString());
