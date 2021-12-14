@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,25 +24,30 @@
     <script src="js/plugin/summernote-bs4.js"></script>
     <script src="js/bbs.js"></script>
     <script>
-    $('.comment').summernote({
-        placeholder: "내용을 입력하세요.",
-        tabsize: 2,
-        height: 100
-      });
-      $('.contents').summernote({
-        placeholder: "내용을 입력하세요.",
-        tabsize: 2,
-        height: 350
-      });
+    $(function(){
+	    $('.comment').summernote({
+	        placeholder: "내용을 입력하세요.",
+	        tabsize: 2,
+	        height: 100
+	      });
+	      $('.contents').summernote({
+	        placeholder: "내용을 입력하세요.",
+	        tabsize: 2,
+	        height: 350
+	      });    	
+    })
+    
     </script>
 </head>
 <body>
     <div class="container mb-5"> 
         <h1 class="text-center my-4">
-            연습용 게시판
+            게시판 글 작성
         </h1>
         <form id="writeForm" action="action/writeok.jsp" method="post">
         <input type="hidden" name="wdate" value='<fmt:formatDate value="<%=new java.util.Date() %>" pattern="yyyy-MM-dd"/>' />
+        <input type="hidden" name="id" value="${param.id }" />
+        	
         <ul class="write-title">
             <li class="row">
                <label class="col-2 label" for="uname">이름</label> 
@@ -66,7 +72,7 @@
             </li>    
         </ul>   
         <div class="btn-area px-4 py-4 text-center">
-            <button type="reset" class="btn btn-danger">취소</button> 
+            <button type="reset" class="btn btn-danger" onclick="history.back()">취소</button> 
             <button type="submit" class="btn btn-dark">전송</button>
         </div>
     </form>
