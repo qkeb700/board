@@ -118,11 +118,13 @@ public class DbDao {
 	public void hitUpdateDb(String col, String id) {
 		PreparedStatement pstmt = null;
 		try {
-			String sql;
-			if(col == "hit") {
+			String sql = null;
+			if(col.equals("hit")) {
 				sql = "update board set hit=hit+1 where id=?";				
-			}else {
+			}else if(col.equals("memocount")){
 				sql = "update board set memocount=memocount+1 where id=?";
+			} else if(col.equals("delmemocount")) {
+				sql = "update board set memocount=memocount-1 where id=?";
 			}
 			pstmt = connection.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -253,19 +255,19 @@ public class DbDao {
 		try {
 			switch(col) {
 			case "writer":
-				sql ="select * from board where writer like ? order by id desc limit ?, ?";
+				sql ="select * from board where writer like ? order by orN desc, grN asc limit ?, ?";
 			break;
 			case "title":
-				sql ="select * from board where title like ? order by id desc limit ?, ?";
+				sql ="select * from board where title like ? order by orN desc, grN asc limit ?, ?";
 			break;
 			case "content":
-				sql ="select * from board where content like ? order by id desc limit ?, ?";
+				sql ="select * from board where content like ? order by orN desc, grN asc limit ?, ?";
 			break;
 			case "all":
-				sql ="select * from board where title like ? or content like ? order by id desc limit ?, ?";
+				sql ="select * from board where title like ? or content like ? order by orN desc, grN asc limit ?, ?";
 			break;
 			default:
-				sql ="select * from board order by id desc limit ?, ?";
+				sql ="select * from board order by orN desc, grN asc limit ?, ?";
 		}
 			
 			pstmt = connection.prepareStatement(sql);
@@ -284,13 +286,26 @@ public class DbDao {
 					pstmt.setInt(3, ed);	
 				}
 			}
+			String title = null;
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Column column = new Column();
 				column.setId(rs.getString("id"));
 				column.setWriter(rs.getString("writer"));
 				column.setPwd(rs.getString("pwd"));
-				column.setTitle(rs.getString("title"));
+				
+				title = rs.getString("title");
+				
+				if(rs.getInt("grN") > 0) {
+					String re = null;
+					re = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+					if(rs.getInt("lyN") > 1) {
+						re = re + "&nbsp;&nbsp;&nbsp;&nbsp;";
+					}
+					title = re + "<i class=\"fas fa-level-up-alt tr90\"></i>&nbsp;&nbsp; " + title;
+				}
+				
+				column.setTitle(title);
 				column.setContent(rs.getString("content"));
 				column.setWdate(rs.getString("wdate"));
 				column.setHit(rs.getString("hit"));
@@ -420,4 +435,32 @@ public class DbDao {
 				}
 			}
 		}
+		/*
+		// 업데이트 쿼리
+		public void upgrade() {
+			PreparedStatement pstmt, pstmt2 = null;
+			ResultSet rs = null;
+			String sql, query = null;
+			int i = 1;
+			try {
+				sql = "select id from board";
+				pstmt = connection.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					System.out.println(rs.getString("id") + "::" + i);
+					query = "update board set orN = ?, grN = ?, lyN = ? where id = ?";
+					pstmt2 = connection.prepareStatement(query);
+					pstmt2.setInt(1, i);
+					pstmt2.setInt(2, 0);
+					pstmt2.setInt(3, 0);
+					pstmt2.setString(4, rs.getString("id"));
+					pstmt2.executeUpdate();
+					i++;
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		*/
 }
