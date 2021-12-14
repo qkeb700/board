@@ -157,6 +157,30 @@
     	padding: 100px;
     	margin-bottom:50px;
     }
+    /** VIEW **/
+    .popup{
+    	display:none;
+    	width:800px;
+    	height: 400px;
+    	padding: 50px;
+    	border:1px solid #eee;
+    	border-radius:20px;
+    	box-shadow:0 0 25px 0 rgba(0,0,0,0.25);
+    	position:fixed;
+    	top:50%;
+    	left:50%;
+    	transform:translate(-50%, -50%);
+    	background:#fff;
+    }
+    .popup form{
+    	margin-top:60px;
+    }
+    .closebtn{
+    	font-size:30px;
+    }
+    .tr90{
+      	transform: rotate(90deg);
+      }
     @media screen and (max-width:768px) {
       .btn-write {
         display: block;
@@ -168,6 +192,7 @@
       .pc-hidden {
         display: block;
       }
+      
       /***** LIST ****/
       td a {
         display: block;
