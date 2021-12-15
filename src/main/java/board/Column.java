@@ -1,7 +1,31 @@
 package board;
 
 public class Column {
-	private String id, writer, pwd, title, content, wdate, hit, memocount;
+	private String id, orN, grN, lyN, writer, pwd, title, content, wdate, hit, memocount;
+
+	public String getOrN() {
+		return orN;
+	}
+
+	public void setOrN(String orN) {
+		this.orN = orN;
+	}
+
+	public String getGrN() {
+		return grN;
+	}
+
+	public void setGrN(String grN) {
+		this.grN = grN;
+	}
+
+	public String getLyN() {
+		return lyN;
+	}
+
+	public void setLyN(String lyN) {
+		this.lyN = lyN;
+	}
 
 	public String getMemocount() {
 		return memocount;
