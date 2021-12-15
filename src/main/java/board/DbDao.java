@@ -40,14 +40,53 @@ public class DbDao {
 	//insertDb(){}
 	public void insertDb(Column column) {
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		String id = column.getId();
+		int orN = 0, grN = 0, lyN = 0;
+		
+		if(id != null) {
+			try {
+				sql = "update board set grN = grN+1 where orN = ? and grN > ?";
+				pstmt = connection.prepareStatement(sql);
+				pstmt.setString(1, column.getOrN());
+				pstmt.setString(2, column.getGrN());
+				pstmt.executeUpdate();
+				
+				orN = Integer.parseInt(column.getOrN());
+				grN = Integer.parseInt(column.getGrN()) + 1;
+				lyN = Integer.parseInt(column.getLyN()) + 1;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				sql = "select Max(orN) from board";
+				pstmt = connection.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					orN = rs.getInt("Max(orN)") + 1;
+					grN = 0;
+					lyN = 0;
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
 		try {
-			String sql = "insert into board (writer, pwd, title, content, wdate) values (?,?,?,?,?)"; 
+			sql = "insert into board (orN, grN, lyN, writer, pwd, title, content, wdate) values (?,?,?,?,?,?,?,?)"; 
 			pstmt = connection.prepareStatement(sql);
-			pstmt.setString(1, column.getWriter());
-			pstmt.setString(2, column.getPwd());
-			pstmt.setString(3, column.getTitle());
-			pstmt.setString(4, column.getContent());
-			pstmt.setString(5, column.getWdate());
+			pstmt.setInt(1, orN);
+			pstmt.setInt(2, grN);
+			pstmt.setInt(3, lyN);
+			pstmt.setString(4, column.getWriter());
+			pstmt.setString(5, column.getPwd());
+			pstmt.setString(6, column.getTitle());
+			pstmt.setString(7, column.getContent());
+			pstmt.setString(8, column.getWdate());
 			
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -174,6 +213,9 @@ public class DbDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 					column.setId(rs.getString("id"));
+					column.setOrN(rs.getString("orN"));
+					column.setGrN(rs.getString("grN"));
+					column.setLyN(rs.getString("lyN"));
 					column.setWriter(rs.getString("writer"));
 					column.setPwd(rs.getString("pwd"));
 					column.setTitle(rs.getString("title"));
@@ -435,7 +477,7 @@ public class DbDao {
 				}
 			}
 		}
-		/*
+		
 		// 업데이트 쿼리
 		public void upgrade() {
 			PreparedStatement pstmt, pstmt2 = null;
@@ -462,5 +504,5 @@ public class DbDao {
 				e.printStackTrace();
 			}
 		}
-		*/
+		
 }
