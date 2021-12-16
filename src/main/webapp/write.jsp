@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ page import="board.DbDao, board.Column" %> 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,8 +47,12 @@
             게시판 글 작성
         </h1>
         <form id="writeForm" action="action/writeok.jsp" method="post">
-        <input type="hidden" name="wdate" value='<fmt:formatDate value="<%=new java.util.Date() %>" pattern="yyyy-MM-dd"/>' />
+        <input type="hidden" name="wdate" value='<fmt:formatDate value="<%=new java.util.Date() %>" pattern="yyyy-MM-dd"/>' />      
+              
         <input type="hidden" name="id" value="${param.id }" />
+        <input type="hidden" name="orN" value="${param.orN }">
+        <input type="hidden" name="grN" value="${param.grN }">
+        <input type="hidden" name="lyN" value="${param.lyN }">
         	
         <ul class="write-title">
             <li class="row">

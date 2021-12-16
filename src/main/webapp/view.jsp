@@ -70,7 +70,7 @@ pageContext.setAttribute("col", col);
 		</ul>
 
 		<div class="mt-3 mb-5 pb-5 text-right">
-			<a href="write.jsp?id=${param.id }" type="button" class="btn btn-secondary btn-write px-4"> 답글쓰기 </a>
+			<a href="write.jsp?id=${param.id }&orN=${col.orN}&grN=${col.grN}&lyN=${col.lyN}" type="button" class="btn btn-secondary btn-write px-4"> 답글쓰기 </a>
 			<a href="edit.jsp?id=${param.id }" type="button" class="btn btn-secondary btn-write px-4"> 수정 </a> 
 			<a href="del.jsp?id=${param.id }" type="button" class="btn btn-secondary btn-write px-4"> 삭제 </a> 
 			<c:if test="${param.pg eq 'true' }">
