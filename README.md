@@ -16,10 +16,10 @@
 - #####	보안을 위해 권한이 허가되지 않은 경로로의 접근은 제한합니다.
 
 ## 프로젝트 상세 소개
-### [링크](https://qkeb700.github.io/projects/bbs)
+### [링크 : https://qkeb700.github.io/projects/bbs](https://qkeb700.github.io/projects/bbs)
 
 ## 프로젝트 소스코드 보기
-### [링크](https://github.com/qkeb700/board)
+### [링크 : https://github.com/qkeb700/board](https://github.com/qkeb700/board)
 ### 프론트엔드 기술
 #### 1.	회원가입
 회원 약관 동의를 통해 가입을 할 수 있습니다.
